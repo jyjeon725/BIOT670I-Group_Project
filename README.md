@@ -13,11 +13,19 @@
 ## Download 10x Genomics Data
 
 ```bash
-# Navigate to analysis directory
-cd ~/project2_scrna
+# Navigate to Desktop
+cd ~/Desktop
 
-# Make folders
-mkdir -p data/raw data/processed results/figures
+# Make folder for group project
+mkdir project2_scrna
+
+# Navigate to analysis directory
+cd ~/Desktop/project2_scrna
+
+# Make folders and files
+mkdir -p src data/raw data/processed results/figures logs
+touch src/01_qc_preprocess.py
+touch README.md
 
 
 ```
