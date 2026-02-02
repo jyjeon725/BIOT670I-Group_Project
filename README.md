@@ -17,7 +17,7 @@
 cd ~/project2_scrna
 
 # Make folders
-mkdir -p env src data/raw data/processed results/figures results/tables logs
+mkdir -p data/raw data/processed results/figures
 
 
 ```
