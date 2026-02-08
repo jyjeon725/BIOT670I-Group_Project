@@ -1,0 +1,17 @@
+# Python virtual environments
+scanpy_env/
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Data & results (Scanpy)
+data/raw/
+data/processed/
+results/
+*.h5ad
+
+# Jupyter
+.ipynb_checkpoints/
