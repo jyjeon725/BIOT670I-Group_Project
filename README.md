@@ -4,14 +4,20 @@
 - **GitHub Setup**
   - Team members: YoungJu Jeon (Preprocessing and Quality Control), Berke Sahbazoglu (Dimensionality Reduction and Clustering), Luxurie Mills (Cell Type Annotation), Christian Gifueroa-Perez (Differential Expression (DE) Analysis)
 
-%%bash
+```bash
 /usr/bin/python3 -m venv scanpy_env
+
 source scanpy_env/bin/activate
+
 pip install --upgrade pip setuptools wheel
+
 pip install scanpy
+
 python -m pip install scikit-misc
+```
 
 
+```bash
 #Enable future-style type annotations
 from __future__ import annotations
 #Import matplotlib for plotting and visualization
@@ -65,7 +71,11 @@ adata.var_names_make_unique()  # this is unnecessary if using `var_names='gene_i
 #Plot the genes with the highest total expression across all cells
 #To show those genes that yield the highest fraction of counts in each single cell, across all cells.
 sc.pl.highest_expr_genes(adata, n_top=20, save=".png")
+```
 
+![QC highest_expr_genes](write/figures/highest_expr_genes.png)
+
+```bash
 #Filter out cells with very few detected genes
 sc.pp.filter_cells(adata, min_genes=200)  # this does nothing, in this specific case
 
@@ -90,12 +100,20 @@ sc.pl.violin(
     jitter=0.4,
     multi_panel=True, save="_plot.png"
 )
+```
 
+![QC violin plot](write/figures/violin_plot.png)
+
+```bash
 #To create scatter plots for QC relationships
 fig, axs = plt.subplots(1, 2, figsize=(10, 4), layout="constrained")
 sc.pl.scatter(adata, x="total_counts", y="pct_counts_mt", show=False, ax=axs[0])
 sc.pl.scatter(adata, x="total_counts", y="n_genes_by_counts", show=False, ax=axs[1], save=".png");
+```
 
+![QC scatter](write/figures/scatter.png)
+
+```bash
 #To filter cells based on QC thresholds that remove cells with too many genes, too few genes, or high mitochondrial content
 adata = adata[
     (adata.obs.n_genes_by_counts < 2500) & (adata.obs.n_genes_by_counts > 200) & (adata.obs.pct_counts_mt < 5),
@@ -121,7 +139,11 @@ v_genes = sc.pp.highly_variable_genes(adata, layer="counts", n_top_genes=2000, m
 
 #Plot highly variable genes
 sc.pl.highly_variable_genes(adata, save =".png")
+```
 
+![QC filter_genes_dispersion](write/figures/filter_genes_dispersion.png)
+
+```bash
 #Store scaled data in a separate layer
 #Scaling is done after regressing out unwanted technical effects
 adata.layers["scaled"] = adata.X.toarray()
@@ -133,4 +155,4 @@ sc.pp.regress_out(adata, ["total_counts", "pct_counts_mt"], layer="scaled")
 sc.pp.scale(adata, max_value=10, layer="scaled")
 
 print("QC filtering DONE!")
-
+```
