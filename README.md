@@ -18,6 +18,14 @@ python -m pip install scikit-misc
 
 
 ```bash
+mkdir -p data write
+cd data
+test -f pbmc3k_filtered_gene_bc_matrices.tar.gz || curl https://cf.10xgenomics.com/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz -o pbmc3k_filtered_gene_bc_matrices.tar.gz
+tar -xzf pbmc3k_filtered_gene_bc_matrices.tar.gz
+```
+
+
+```bash
 #Enable future-style type annotations
 from __future__ import annotations
 #Import matplotlib for plotting and visualization
