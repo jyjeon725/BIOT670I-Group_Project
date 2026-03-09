@@ -1,0 +1,117 @@
+# Activate Jupyter notebook from here directly to be able to use Scanpy
+(scanpy) C:\Users\Erman\anaconda3\envs\scanpy>jupyter notebook
+
+# Import Scanpy library
+import scanpy as sc
+
+# Load example 3k PBMC dataset
+# Loads single-cell RNA-seq data from ~3000 PBMCs into an object
+adata = sc.datasets.pbmc3k()
+
+# Remove cells with <200 expressed genes
+# Removes cells that likely contain little biological signal like damaged or dead cells
+sc.pp.filter_cells(adata, min_genes=200)
+
+# Remove genes detected in fewer than 3 cells
+# Removes genes expressed in very few cells to reduce noise.
+sc.pp.filter_genes(adata, min_cells=3)
+
+# Normalize cell expression levels to 10,000
+# Makes expression levels comparable across cells by adjusting for sequencing depth differences
+sc.pp.normalize_total(adata, target_sum=1e4)
+
+# Log-transform the data to stabilize variance
+# Applies log(1 + x) transformation to better visualize differences
+sc.pp.log1p(adata)
+
+# Show 2000 most variable genes
+# These genes drive biological differences like a phenotype difference such as a genetic illness
+sc.pp.highly_variable_genes(adata, n_top_genes=2000)
+
+adata = adata[:, adata.var.highly_variable]
+
+# Mean = 0  Variance = 1
+# Range is +/-10 to reduce outliers
+sc.pp.scale(adata, max_value=10)
+
+# Perform PCA to reduce dimensionality for visualization and clustering
+sc.pp.pca(adata)
+
+# Give basic PCA scatter plot PC1 vs PC2
+sc.pl.pca(adata)
+
+# Plot genes that drive each principal component
+sc.pl.pca_loadings(adata)
+
+# Plot variance ratio of principal components
+sc.pl.pca_variance_ratio(adata, log=True)
+
+# Builds a neighborhood graph connecting each cell to its nearest neighbors based on PCA coordinates
+# Cells with similar gene expression are connected
+# Needed for clustering and UMAP/tSNE embedding
+sc.pp.neighbors(adata, n_neighbors=10, n_pcs=40)
+
+# UMAP > Leiden
+# If resolution increases many small clusters if it goes down few big clusters
+sc.tl.leiden(adata, resolution=0.5)
+
+# Reduce dimension and make 2D visual of cells by using neighborhood graph
+sc.tl.umap(adata)
+
+# Plot UMAP and give color for each cell based on their category
+sc.pl.umap(adata, color='leiden')
+
+# Groups cells into clusters based on Leiden algorithm
+sc.tl.leiden(adata, resolution=0.5)
+
+# Run t-SNE visualization
+sc.tl.tsne(adata)
+
+# Plot UMAP colored by Leiden clusters
+sc.pl.umap(adata, color='leiden')
+
+import scanpy as sc
+
+# Load the example PBMC dataset
+adata = sc.datasets.pbmc3k()
+
+# Remove cells with very few detected genes
+sc.pp.filter_cells(adata, min_genes=200)
+
+# Remove genes that appear in only a few cells
+sc.pp.filter_genes(adata, min_cells=3)
+
+# Normalize counts so each cell has the same total counts
+sc.pp.normalize_total(adata, target_sum=10000)
+
+# Apply log transformation
+sc.pp.log1p(adata)
+
+# Identify highly variable genes
+sc.pp.highly_variable_genes(
+adata,
+min_mean=0.0125,
+max_mean=3,
+min_disp=0.5
+)
+# Keep only those highly variable genes
+adata = adata[:, adata.var.highly_variable]
+
+# Scale expression values
+sc.pp.scale(adata, max_value=10)
+
+# Run PCA to reduce dimensions
+sc.tl.pca(adata)
+
+# Build the nearest-neighbor graph
+sc.pp.neighbors(adata, n_neighbors=10, n_pcs=40)
+
+# Perform Louvain clustering
+sc.tl.louvain(adata, resolution=0.5)
+
+# Calculate UMAP coordinates
+sc.tl.umap(adata)
+
+# Plot clusters on UMAP
+sc.pl.umap(adata, color="louvain")
+
