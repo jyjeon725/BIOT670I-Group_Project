@@ -92,33 +92,26 @@ de_df.to_csv("pbmc3k_DE_results_by_cluster.csv", index=False)
 print("Saved DE results to pbmc3k_DE_results_by_cluster.csv")
 
 # ---------------------------------------------------------------------
-# 3B. Cell type annotation (Luxurie Mills add)
+# 3B. Cell Type Annotation 
 # ---------------------------------------------------------------------
-
-print("Annotating clusters.....")
+print("Annotating clusters with biological cell types...")
 
 celltype_annotations = {
-    "0": "T cells",
+    "0": "CD4 T cells",
     "1": "B cells",
-    "2": "Cytotoxic T/NK cells",
-    "3": "Dendritic cells",
-    "4": "Monocytes",
-    "5": "Platelets/ Megakaryocytes"
+    "2": "CD14+ Monocytes",
+    "3": "NK cells",
+    "4": "CD8 T cells",
+    "5": "FCGR3A+ Monocytes",
+    "6": "Dendritic cells",
+    "7": "Megakaryocytes"
 }
 
-# Map Leiden clusters to cell type labels
+# Map cluster IDs → cell type names
 adata.obs["cell_type"] = adata.obs["leiden"].map(celltype_annotations)
 
-print("Cell type annotation added to dataset.")
-
-# -------------------------------------------------------p
-# CHECK OUTPUT (this is the part for step 2)
-# -------------------------------------------------------
-
-print("\nCell type annotated data review:")
-print(adata.obs.head())
-
-#Luxurie END
+print("Cell type annotation complete.")
+print(adata.obs[["leiden","cell_type"]].head())
 # ---------------------------------------------------------------------
 # 4. Choose marker genes for visualization
 #    You can either:
@@ -159,10 +152,10 @@ print(f"Using {len(marker_genes)} marker genes for visualization.")
 # 5. UMAP colored by clusters and marker genes (quick overview)
 # ---------------------------------------------------------------------
 print("Plotting UMAPs...")
-sc.pl.umap(adata, color=["leiden"], save="_clusters.png", show=False)
+sc.pl.umap(adata, color=["leiden","cell_type"], save="_clusters.png", show=False)
 if marker_genes:
     sc.pl.umap(adata, color=marker_genes[:6], ncols=3, save="_markers.png", show=False)
-
+#sc.pl.umap(adata, color=['cell_type'])
 # ---------------------------------------------------------------------
 # 6. Heatmap of marker genes across clusters
 # ---------------------------------------------------------------------
@@ -172,7 +165,7 @@ if marker_genes:
     sc.pl.heatmap(
         adata,
         var_names=marker_genes,
-        groupby="leiden",
+        groupby="cell_type",
         use_raw=False,
         cmap="viridis",
         dendrogram=True,
@@ -190,7 +183,7 @@ if marker_genes:
     sc.pl.violin(
         adata,
         keys=marker_genes,
-        groupby="leiden",
+        groupby="cell_type",
         rotation=90,
         multi_panel=True,
         show=False,
@@ -206,7 +199,7 @@ if marker_genes:
     sc.pl.dotplot(
         adata,
         var_names=marker_genes,
-        groupby="leiden",
+        groupby="cell_type",
         standard_scale="var",  # scale per gene
         show=False,
         save="_marker_dotplot.png",
