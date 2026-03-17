@@ -25,7 +25,7 @@ test -f pbmc3k_filtered_gene_bc_matrices.tar.gz || curl https://cf.10xgenomics.c
 tar -xzf pbmc3k_filtered_gene_bc_matrices.tar.gz
 ```
 
-- **QC command execution**
+- **Command execution**
 ```bash
 python3 scanpy_script_qc.py
 
