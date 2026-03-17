@@ -31,10 +31,8 @@ python3 scanpy_script_qc.py
 
 python3
 
-python3
-
 python3 cell_annotation.py (LM)
 
-
+python3
 
 ```
