@@ -7,13 +7,19 @@
 
 - **Enviroment Setup**
 
+HOW TO Create virtual environment
+python3 -m venv scanpy_env
+Activate environment
+source scanpy_env/bin/activate
+Install dependencies
+pip install -r requirements.txt
+
 ```bash
 /usr/bin/python3 -m venv scanpy_env
 source scanpy_env/bin/activate
 pip install --upgrade pip setuptools wheel
 pip install scanpy
 pip install scikit-misc
-
 
 
 ```
