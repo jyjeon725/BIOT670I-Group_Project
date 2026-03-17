@@ -1,16 +1,17 @@
 #!/bin/bash
 
-# Create virtual environment
+echo "Creating virtual environment..."
 python3 -m venv scanpy_env
 
-# Activate environment
+echo "Activating environment..."
 source scanpy_env/bin/activate
 
-# Upgrade installer tools
+echo "Upgrading pip..."
 pip install --upgrade pip setuptools wheel
 
-# Install dependencies
-pip install scanpy scikit-misc
+echo "Installing project dependencies..."
+pip install -r requirements.txt
 
-echo "Environment ready. Activate with:"
+echo "Environment setup complete."
+echo "Activate later using:"
 echo "source scanpy_env/bin/activate"
