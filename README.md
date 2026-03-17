@@ -4,7 +4,14 @@
 - **GitHub Setup**
   - Team members: YoungJu Jeon (Preprocessing and Quality Control), Berke Sahbazoglu (Dimensionality Reduction and Clustering), Luxurie Mills (Cell Type Annotation), Christian Gifueroa-Perez (Differential Expression (DE) Analysis)
 
-
+- **Enviroment Setup**
+```Linux
+python3 -m venv scanpy_env
+#Activate environment
+source scanpy_env/bin/activate
+#Install dependencies
+pip install -r requirements.txt
+```
 - **Enviroment Setup**
 ```Linux
 python3 -m venv scanpy_env
