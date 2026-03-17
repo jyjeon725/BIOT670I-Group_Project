@@ -4,7 +4,7 @@
 - **GitHub Setup**
   - Team members: YoungJu Jeon (Preprocessing and Quality Control), Berke Sahbazoglu (Dimensionality Reduction and Clustering), Luxurie Mills (Cell Type Annotation), Christian Gifueroa-Perez (Differential Expression (DE) Analysis)
 
-## Preprocessing and Quality Control
+
 - **Enviroment Setup**
 
 ```bash
