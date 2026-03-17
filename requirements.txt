@@ -1,5 +1,0 @@
-/usr/bin/python3 -m venv scanpy_env
-source scanpy_env/bin/activate
-pip install --upgrade pip setuptools wheel
-pip install scanpy
-pip install scikit-misc

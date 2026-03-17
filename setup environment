@@ -1,0 +1,11 @@
+/usr/bin/python3 
+#Create virtual environment in linux/macOS:
+python3 -m venv scanpy_env
+
+#Create virtual enviroment in windows:
+python -m venv scanpy_env
+
+#activate enviornment 
+source scanpy_env/bin/activate
+
+
