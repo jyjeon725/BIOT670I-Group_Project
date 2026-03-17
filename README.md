@@ -6,12 +6,11 @@
 
 
 - **Enviroment Setup**
-
-HOW TO Create virtual environment
+```Linux
 python3 -m venv scanpy_env
-Activate environment
+#Activate environment
 source scanpy_env/bin/activate
-Install dependencies
+#Install dependencies
 pip install -r requirements.txt
 
 ```bash
