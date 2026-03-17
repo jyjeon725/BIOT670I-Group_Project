@@ -4,8 +4,8 @@
 - **GitHub Setup**
   - Team members: YoungJu Jeon (Preprocessing and Quality Control), Berke Sahbazoglu (Dimensionality Reduction and Clustering), Luxurie Mills (Cell Type Annotation), Christian Gifueroa-Perez (Differential Expression (DE) Analysis)
 
-- **Enviroment Setup Linux/macOS**
-```Linux
+- **Enviroment Setup Windows**
+```windows
 python3 -m venv scanpy_env
 #Activate environment
 source scanpy_env/bin/activate
@@ -15,12 +15,15 @@ pip install -r requirements.txt
 - **Enviroment Setup**
 ```bash
 /usr/bin/python3 -m venv scanpy_env
+#Activate environment
 source scanpy_env/bin/activate
+#Install dependencies
 pip install --upgrade pip setuptools wheel
 pip install scanpy
 pip install scikit-misc
 
-
+#Install dependecies options 2:
+pip install -r requirements.txt
 ```
 - **Data Download**
 ```bash
