@@ -73,7 +73,8 @@ sc.tl.tsne(adata)
 sc.pl.umap(adata, color='leiden')
 
 
-python3
+python3 cell_annotation.py (LM)
+
 
 
 ```
